@@ -14,4 +14,10 @@ describe('Комісія за переказ', () => {
   it('має обмежувати комісію максимумом 150 грн', () => {
     expect(calculateTransferFee(20000)).toBe(150);
   });
+it('має дозволяти переказ рівно 50000 грн', () => {
+  expect(calculateTransferFee(50000)).toBe(150);
+});
+it('має викидати помилку для переказу понад 50000 грн', () => {
+  expect(() => calculateTransferFee(50001)).toThrow();
+});
 });
