@@ -54,4 +54,18 @@ it('має відхиляти значення NaN', () => {
 it('має відхиляти нескінченну суму переказу', () => {
   expect(() => calculateTransferFee(Number.POSITIVE_INFINITY)).toThrow();
 });
+it('має повертати мінімальну комісію для суми 499.99 грн', () => {
+  expect(calculateTransferFee(499.99)).toBe(5);
+});
+
+it('має повертати 1% для суми 500.01 грн', () => {
+  expect(calculateTransferFee(500.01)).toBe(5.0001);
+});
+it('має повертати 1% для суми 14999.99 грн', () => {
+  expect(calculateTransferFee(14999.99)).toBe(149.9999);
+});
+
+it('має обмежувати комісію 150 грн для суми 15000.01 грн', () => {
+  expect(calculateTransferFee(15000.01)).toBe(150);
+});
 });
