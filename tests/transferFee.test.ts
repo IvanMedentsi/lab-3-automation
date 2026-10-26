@@ -32,4 +32,17 @@ it('має повертати рівно 5 грн комісії для пере
 it('має повертати рівно 150 грн комісії для переказу 15000 грн', () => {
   expect(calculateTransferFee(15000)).toBe(150);
 });
+it.each([
+  { amount: 100, expectedFee: 5 },
+  { amount: 500, expectedFee: 5 },
+  { amount: 1000, expectedFee: 10 },
+  { amount: 5000, expectedFee: 50 },
+  { amount: 15000, expectedFee: 150 },
+  { amount: 20000, expectedFee: 150 },
+])(
+  'для переказу $amount грн комісія становить $expectedFee грн',
+  ({ amount, expectedFee }) => {
+    expect(calculateTransferFee(amount)).toBe(expectedFee);
+  },
+);
 });
