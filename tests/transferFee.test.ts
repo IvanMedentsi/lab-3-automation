@@ -51,4 +51,7 @@ it('має повертати мінімальну комісію для сум�
 it('має відхиляти значення NaN', () => {
   expect(() => calculateTransferFee(Number.NaN)).toThrow();
 });
+it('має відхиляти нескінченну суму переказу', () => {
+  expect(() => calculateTransferFee(Number.POSITIVE_INFINITY)).toThrow();
+});
 });
