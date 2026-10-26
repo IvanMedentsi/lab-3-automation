@@ -1,6 +1,6 @@
 
 import { describe, it, expect } from 'vitest';
-import { calculateTransferFee } from '../src/transferFee';
+import { calculateTransferFee } from '../src/transferFee.js';
 
 describe('Комісія за переказ', () => {
   it('має повертати мінімальну комісію 5 грн для переказу 100 грн', () => {
@@ -45,4 +45,10 @@ it.each([
     expect(calculateTransferFee(amount)).toBe(expectedFee);
   },
 );
+it('має повертати мінімальну комісію для суми з копійками', () => {
+  expect(calculateTransferFee(250.5)).toBe(5);
+});
+it('має відхиляти значення NaN', () => {
+  expect(() => calculateTransferFee(Number.NaN)).toThrow();
+});
 });

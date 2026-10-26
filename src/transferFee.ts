@@ -4,6 +4,10 @@ const FEE_RATE = 0.01;
 const MAX_TRANSFER_AMOUNT = 50000;
 
 function validateTransferAmount(amount: number): void {
+  if (!Number.isFinite(amount)) {
+    throw new Error('Сума переказу має бути скінченним числом');
+  }
+
   if (amount <= 0) {
     throw new Error('Сума переказу має бути більшою за 0 грн');
   }
@@ -12,7 +16,6 @@ function validateTransferAmount(amount: number): void {
     throw new Error('Переказ понад 50000 грн потребує додаткової перевірки');
   }
 }
-
 export function calculateTransferFee(amount: number): number {
   validateTransferAmount(amount);
 
